@@ -1,0 +1,30 @@
+<!DOCTYPE HTML>
+<html lang="zh-cn">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+	<meta name="apple-mobile-web-app-capable" content="yes"/>
+	<meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+	<meta name="format-detection" content="email=no" />
+	<meta name="format-detection" content="telephone=no" />
+	<title>合并测试</title>
+</head>
+<body>
+<h2>引用(二)</h2>
+<h3>js、css混合综合</h3>
+<pre>
+	js、css资源混合引用, css置后
+	compose.require(['c', 'css/reset.css'], function(c){
+		alert(c);
+	}, ['c']);
+</pre>
+<script type="text/javascript" data-basepath="scripts" data-contextpath="" data-dependonload="true"  src="scripts/lib/compose.js"></script>
+<script type="text/javascript" src="scripts/first-index.js"></script>
+<script type="text/javascript">
+	//js、css资源混合引用, css置后
+	compose.require(['c', 'css/reset.css'], function(c){
+		alert(c);
+	}, ['c']);
+</script>
+</body>
+</html>
