@@ -10,13 +10,21 @@
 	<title>合并测试</title>
 </head>
 <body>
-<h2>引用(一)</h2>
-<h3>多文件引入</h3>
+<h2>引用资源(一)</h2>
+<h3>多文件引入1</h3>
+<pre>
+	compose.require(['mod/a', 'mod/b', 'mod/c'], function(a, b, c){
+		alert(a);
+		alert(b);
+		alert(c);
+		alert('入口');
+	});
+</pre>
 <script type="text/javascript" data-basepath="scripts" data-contextpath="" data-dependonload="true"  src="scripts/lib/compose.js"></script>
 <script type="text/javascript" src="scripts/first-index.js"></script>
 <script type="text/javascript" src="scripts/second-index.js"></script>
 <script type="text/javascript">
-	compose.require(['a', 'b', 'c'], function(a, b, c){
+	compose.require(['mod/a', 'mod/b', 'mod/c'], function(a, b, c){
 		alert(a);
 		alert(b);
 		alert(c);

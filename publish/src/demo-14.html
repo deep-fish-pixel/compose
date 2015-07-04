@@ -1,0 +1,24 @@
+<!DOCTYPE HTML>
+<html lang="zh-cn">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+	<meta name="apple-mobile-web-app-capable" content="yes"/>
+	<meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+	<meta name="format-detection" content="email=no" />
+	<meta name="format-detection" content="telephone=no" />
+	<title>合并测试</title>
+</head>
+<body>
+<h2>资源引用(五)</h2>
+<h3>支持类似amd、cmd模块定义获取</h3>
+<pre>
+    compose.require(['mod/page/second-page'], function(wthird, pforth){
+        //该文件入口
+        alert(wthird.id);
+    });
+</pre>
+<script type="text/javascript" data-basepath="scripts" data-contextpath="" data-dependonload="true" src="scripts/lib/compose.js"></script>
+<script type="text/javascript" src="scripts/eighth-index.js"></script>
+</body>
+</html>

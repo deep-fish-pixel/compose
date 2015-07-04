@@ -11,15 +11,21 @@
 </head>
 <body>
 <h2>引用资源(一)</h2>
-<h3>引用单个文件，增加资源引用</h3>
+<h3>引用单个文件，重复资源的引用</h3>
+<pre>
+	compose.require(['mod/a', 'mod/b'], function(a, b){
+		alert(a);
+		alert(b);;
+	});
+</pre>
 <script type="text/javascript" data-basepath="scripts" data-contextpath="" data-dependonload="true"  src="scripts/lib/compose.js"></script>
 <script type="text/javascript" src="scripts/first-index.js"></script>
 <script type="text/javascript">
-	compose.require(['a', 'b'], function(a, b){
+	compose.require(['mod/a', 'mod/b'], function(a, b){
 		alert(a);
 		alert(b);
-		alert('入口2，您的代码应该在这里');
-	});
+	}, ['a', 'b', 'c']);
+	
 </script>
 </body>
 </html>

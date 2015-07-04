@@ -13,13 +13,13 @@
 <h2>配置项方式(一)</h2>
 <h3>javacript配置</h3>
 <pre>
-	//js配置优先级会覆盖属性配置
+	//js配置优先级高于属性配置
 	compose.config({
 		basePath: 'scripts',//设置javascript公共路径
 		contextPath: '',//设置项目路径，默认为当前目录
 		dependOnload: 'true'//是否通过onload触发
 	});
-	compose.require(['a'], function(){
+	compose.require(['mod/a'], function(){
 		alert(a);
 	});
 	compose.require(function(){
@@ -34,7 +34,7 @@
 		contextPath: '',//设置项目路径，默认为当前目录
 		dependOnload: 'true'//是否通过onload触发
 	});
-	compose.require(['a'], function(){
+	compose.require(['mod/a'], function(){
 		alert(a);
 	});
 	compose.require(function(){

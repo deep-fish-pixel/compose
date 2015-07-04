@@ -1,0 +1,32 @@
+<!DOCTYPE HTML>
+<html lang="zh-cn">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+	<meta name="apple-mobile-web-app-capable" content="yes"/>
+	<meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+	<meta name="format-detection" content="email=no" />
+	<meta name="format-detection" content="telephone=no" />
+	<title>合并测试</title>
+</head>
+<body>
+<h2>资源引用(一)</h2>
+<h3>远程资源的配置</h3>
+<pre>
+    paths 配置对象和路径的键值对
+    	name 检索对象的名称
+        value 资源路径
+    compose.config({
+        paths: {
+            jQuery: 'http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min'
+        }
+    });
+    compose.require(['jQuery'], function(jquery){
+        //该文件入口
+        alert(jquery);
+    });
+</pre>
+<script type="text/javascript" data-basepath="scripts" data-contextpath="" data-dependonload="true" src="scripts/lib/compose.js"></script>
+<script type="text/javascript" src="scripts/eleventh-index.js"></script>
+</body>
+</html>

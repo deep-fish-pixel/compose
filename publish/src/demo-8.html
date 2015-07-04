@@ -10,8 +10,14 @@
 	<title>合并测试</title>
 </head>
 <body>
-<h2>引用(二)</h2>
-<h3>css引用综合</h3>
+<h2>资源引用(三)</h2>
+<h3>纯css引用</h3>
+<pre>
+	建议css在非首屏中使用
+	compose.require(['css/module.css', 'css/reset.css'], function(){
+		alert(a);
+	});
+</pre>
 <script type="text/javascript" data-basepath="scripts" data-contextpath="" data-dependonload="true"  src="scripts/lib/compose.js"></script>
 <script type="text/javascript" src="scripts/first-index.js"></script>
 <script type="text/javascript">
@@ -19,10 +25,6 @@
 	compose.require(['css/module.css', 'css/reset.css'], function(){
 		alert(a);
 	});
-	//js、css资源混合引用
-	compose.require(['c', 'css/reset.css'], function(c){
-		alert(c);
-	}, ['c']);
 </script>
 </body>
 </html>

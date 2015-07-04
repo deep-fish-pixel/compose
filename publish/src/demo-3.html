@@ -12,6 +12,13 @@
 <body>
 <h2>引用资源(一)</h2>
 <h3>引用单个文件</h3>
+<pre>
+	compose.require(function(){
+		alert(a);
+		alert(b);
+		alert('入口1，您的代码应该在这里');
+	});
+</pre>
 <script type="text/javascript" data-basepath="scripts" data-contextpath="" data-dependonload="true"  src="scripts/lib/compose.js"></script>
 <script type="text/javascript" src="scripts/first-index.js"></script>
 <script type="text/javascript">

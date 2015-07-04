@@ -11,30 +11,23 @@
 </head>
 <body>
 <h2>引用(二)</h2>
-<h3>多文件异步引入</h3>
+<h3>多次重复引用和异步调用</h3>
 <pre>
-	compose.require(function(c){
-		alert('入口');
-		//使用时引用
-		setTimeout(function(){
-			compose.require(['d'], function(d){
-				alert(d);
-			}, ['d']);
-		}, 3000);
+	compose.require(function(){
+		alert(d);
 	});
 </pre>
 <script type="text/javascript" data-basepath="scripts" data-contextpath="" data-dependonload="true"  src="scripts/lib/compose.js"></script>
 <script type="text/javascript" src="scripts/first-index.js"></script>
-<script type="text/javascript" src="scripts/second-index.js"></script>
+<script type="text/javascript" src="scripts/third-index.js"></script>
 <script type="text/javascript">
-	compose.require(function(c){
-		alert('入口');
-		//使用时引用
+	compose.require(function(){
 		setTimeout(function(){
-			compose.require(['d'], function(d){
-				alert(d);
-			}, ['d']);
-		}, 3000);
+			compose.require(['mod/e'], function(e){
+				alert(e);
+			}, ['e']);
+		},1000);
+		alert(d);
 	});
 </script>
 </body>

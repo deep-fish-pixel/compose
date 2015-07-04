@@ -1,0 +1,57 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+		<meta content="telephone=no" name="format-detection" />
+		<link rel="apple-touch-icon-precomposed" href="images/114.png">
+		<title>静态资源文件组合</title>
+		<style type="text/css">
+		body{-webkit-text-size-adjust:none;font-family:"microsoft yahei",Verdana,Arial,Helvetica,sans-serif;font-size:1em;
+		min-width:320px;background:#eee;}
+		a{color:#333;text-decoration:none;}
+		ul,ol,li{list-style:none}
+		body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,button,textarea,p,blockquote,th,td,section,article,aside,header,footer,nav,dialog,figure,hgroup{margin:0;padding:0;}
+		.header{position:relative;height:40px;border-top:1px solid #4CB5FF;}
+		.header .logo{position:absolute;left:12px;top:6px;}
+		.header .cur-title{font-size:16px;color:#fff;}
+		.title-ui-a{position:relative;background:-webkit-gradient(linear, 50% 0%, 50% 100%,from(#0D9BFF),to(#0081DC));border-top:1px solid #4CB5FF;color:#fff;text-align:center;padding:0 5px;height:40px;line-height:40px;font-weight:700;font-size:14px;overflow:hidden;}
+		.title-ui-a .header-title{width:100px;margin:0 auto;text-align:center;overflow:hidden;font-size:16px;}
+		.title-ui-a .p-left{position:absolute;;left:0;}
+		.list-ui-a li,.list-ui-b li,.list-ui-div{position:relative;height:38px;line-height:38px;overflow:hidden;background:-webkit-gradient(linear, 50% 0%, 50% 100%,from(#eee),to(#ddd));border-top:1px solid #ccc;font-size:14px;}
+		.list-ui-div{border-bottom:1px solid #ccc;}
+		.list-ui-a li:last-child,.list-ui-b li:last-child{border-bottom:1px solid #ccc !important;overflow:hidden;}
+		.list-ui-b li,.list-ui-div{background:-webkit-gradient(linear, 50% 0%, 50% 100%,from(#F9F9F9),to(#eee));}
+		.view li{padding:0 10px;}
+		.view li:after{content:' ';position:absolute;top:13px;right:5px;width:7px;height:7px;border:#999 solid;border-width:2px 2px 0 0;-webkit-transform:rotate(45deg);}
+		.view li a{display:block;height:38px;}
+		.long{font-size:18px;}
+		</style>
+	</head>
+	<body>
+		<section class="header title-ui-a">
+			<p class="cur-title">支持ie5以上，火狐、chrome及国产浏览器</p>
+		</section>
+		<ul class="list-ui-a view">
+			<li><a href="demo-1.html" target="_blank">01配置项方式(一) javacript配置</a></li>
+			<li><a href="demo-2.html" target="_blank">02配置项方式(二) 属性配置</a></li>
+            <li><a href="demo-17.html" target="_blank">03配置项方式(三) paths配置</a></li>
+			<li><a href="demo-3.html" target="_blank">03引用资源(一) 引用单个文件</a></li>
+			<li><a href="demo-4.html" target="_blank">04引用资源(一) 引用单个文件，重复引用已有资源</a></li>
+			<li><a href="demo-5.html" target="_blank">05引用资源(一) 超多文件引入1</a></li>
+			<li><a href="demo-7.html" target="_blank">06引用资源(一) 超多文件引入2</a></li>
+			<li><a href="demo-6.html" target="_blank">07引用资源(二) 多文件异步引入</a></li>
+			<li><a href="demo-8.html" target="_blank">08资源引用(三) 纯css引用</a></li>
+            <li><a href="demo-9.html" target="_blank">09资源引用(三) js、css混合综合</a></li>
+            <li><a href="demo-10.html" target="_blank">10资源引用(四) js的另二种引用，使用注入，源文件有部分代码侵入</a></li>
+            <li><a href="demo-11.html" target="_blank">11资源引用(四) js的另二种引用，使用注入，源文件有部分代码侵入,与前者比，satisfy()无参数,但是require中有对象索引数组亦可</a></li>
+            <li><a href="demo-12.html" target="_blank">12资源引用(四) js的另三种引用，与第一种js方案结合使用,特点无侵入</a></li>
+            <li><a href="demo-13.html" target="_blank">13资源引用(五) 多层多级模块的嵌套</a></li>
+            <li><a href="demo-14.html" target="_blank">14资源引用(五) 支持类似amd、cmd模块定义获取</a></li>
+            <li><a href="demo-15.html" target="_blank">15资源引用(五) 支持对象索引和amd组合使用</a></li>
+		</ul>
+	<script src="//10.24.6.179:35729/livereload.js"></script>
+	</body>
+</html>

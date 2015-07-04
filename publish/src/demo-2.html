@@ -10,11 +10,19 @@
 	<title>合并测试</title>
 </head>
 <body>
-<h2>配置项参数(二)</h2>
+<h2>配置项方式(二)</h2>
 <h2>属性配置</h2>
+<pre>
+	compose.require(['mod/a'], function(){
+		alert(a);
+	});
+	compose.require(function(){
+		alert('入口');
+	});
+</pre>
 <script type="text/javascript" data-basepath="scripts" data-contextpath="" data-dependonload="true" src="scripts/lib/compose.js"></script>
 <script type="text/javascript">
-	compose.require(['a'], function(){
+	compose.require(['mod/a'], function(){
 		alert(a);
 	});
 	compose.require(function(){
