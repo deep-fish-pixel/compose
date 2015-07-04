@@ -15,7 +15,10 @@
 	compose.config({
 		basePath: 'scripts',//设置javascript公共路径
 		contextPath: '',//设置项目路径，默认为当前目录
-		dependOnload: 'true'//是否通过onload触发，配置为true即可
+		dependOnload: 'true',//是否通过onload触发，配置为true即可
+        paths: { //配置对象和路径的键值对
+            jQuery: 'http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min'
+        }
 	})
     3.只有一个接口, 重复再重复
 	compose.require(['a'], function(a){
