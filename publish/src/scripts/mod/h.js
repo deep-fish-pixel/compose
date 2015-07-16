@@ -1,2 +1,1 @@
-function h(){}
-compose.satisfy();
+function h(){}compose.satisfy();

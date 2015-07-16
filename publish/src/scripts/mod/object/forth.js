@@ -1,3 +1,1 @@
-compose.require('mod/object/forth', function (){
-	return function forth(){};
-})
+compose.require("mod/object/forth",function(){return function(){}});

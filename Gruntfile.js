@@ -185,5 +185,5 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-copy');
 	grunt.loadNpmTasks('grunt-contrib-uglify');
 	
-	grunt.registerTask('default',   ['clean', 'copy',  'concat', 'cssmin']);
+	grunt.registerTask('default',   ['clean', 'copy', 'uglify', 'concat', 'cssmin']);
 };

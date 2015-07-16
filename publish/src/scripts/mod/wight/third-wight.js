@@ -1,7 +1,1 @@
-compose.require('mod/wight/third-wight', ['mod/object/third', 'mod/object/forth'], function (third, forth){
-	return {
-		id: 'third-wight',
-		third: third,
-		forth: forth
-	}
-})
+compose.require("mod/wight/third-wight",["mod/object/third","mod/object/forth"],function(a,b){return{id:"third-wight",third:a,forth:b}});

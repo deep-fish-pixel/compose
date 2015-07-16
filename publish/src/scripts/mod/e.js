@@ -1,2 +1,1 @@
-function e(){}
-compose.satisfy(e);
+function e(){}compose.satisfy(e);

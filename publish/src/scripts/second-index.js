@@ -1,5 +1,2 @@
-function c (){}
-compose.require(['mod/c'], function(c){
-	//该文件入口
-	return {id:'secondIndex'};
-}, ['c']);
+function c(){}
+compose.require(["mod/c"],function(a){return{id:"secondIndex"}},["c"]);
