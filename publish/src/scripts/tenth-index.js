@@ -48,14 +48,9 @@ compose.require('mod/page/second-page', ['mod/wight/third-wight', 'mod/wight/for
 		wforth: wforth
 	};
 });
-/*compose.require(['mod/page/first-page', 'mod/page/second-page'], function(pfirst, psecond){
+compose.require(['mod/page/first-page.js?first=true'], function(pfirst){
 	//该文件入口
-	alert(pfirst.id);
-	alert(psecond.id);
-}, ['pfirst']);*/
-compose.require(['mod/page/first-page'], function(pfirst){
-	//该文件入口
-	compose.require(['mod/page/second-page'], function(wthird){
+	compose.require(['mod/page/second-page.js?'], function(wthird){
 		//该文件入口
 		alert('second');
 	});
@@ -64,8 +59,7 @@ compose.require(['mod/page/first-page'], function(pfirst){
 			//该文件入口
 			alert('third');
 		}, ['a', 'b']);
-	}, 0);
-	
+	}, 1000);
 }, ['pfirst']);
 
 compose.require(['mod/k'], function(k){

@@ -13,12 +13,13 @@
         
 入口说明
     1.属性配置有3项
-	data-basepath="scripts" data-contextpath="" data-dependonload="true"
+	data-basepath="scripts" data-contextpath="" data-dependonload="true" data-param="v=1"
     2.js配置优先级会覆盖属性配置
 	compose.config({
 		basePath: 'scripts',//设置javascript公共路径
 		contextPath: '',//设置项目路径，默认为当前目录
 		dependOnload: 'true',//是否通过onload触发，配置为true即可
+        data-param: 'v=1', //版本号
 		paths: { //配置对象和路径的键值对
 			jQuery: 'http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min'
 		}
@@ -34,3 +35,7 @@
     	css资源不需检索
     5.接近20个demo， 涵盖所有功能
     6.跟grunt配合使用
+版本修改
+	v1.0.1
+		1.修改多级对象索引失败的bug
+		2.在多核浏览器中，异步调用失败，触发器改用window onload事件触发

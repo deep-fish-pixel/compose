@@ -143,31 +143,6 @@ module.exports = function(grunt) {
 			dest: '<%= dir.rel %>/scripts/ninth-index.js'
 		},
 		{
-			/*demo-15.html*/
-			src: [
-				'<%= dir.rel %>/scripts/mod/object/first.js',
-				'<%= dir.rel %>/scripts/mod/object/second.js',
-				'<%= dir.rel %>/scripts/mod/wight/first-wight.js',
-				'<%= dir.rel %>/scripts/mod/wight/second-wight.js',
-				'<%= dir.rel %>/scripts/mod/page/first-page.js',
-				
-				'<%= dir.rel %>/scripts/mod/object/third.js',
-				'<%= dir.rel %>/scripts/mod/object/forth.js',
-				'<%= dir.rel %>/scripts/mod/wight/third-wight.js',
-				'<%= dir.rel %>/scripts/mod/wight/forth-wight.js',
-				'<%= dir.rel %>/scripts/mod/page/second-page.js',
-				
-				'<%= dir.rel %>/scripts/mod/a.js',
-				'<%= dir.rel %>/scripts/mod/b.js',
-				'<%= dir.rel %>/scripts/mod/c.js',
-				'<%= dir.rel %>/scripts/mod/d.js',
-				'<%= dir.rel %>/scripts/mod/k.js',
-				
-				'<%= dir.rel %>/scripts/ninth-index.js',
-			],
-			dest: '<%= dir.rel %>/scripts/ninth-index.js'
-		},
-		{
 			/*demo-16.html*/
 			src: [
 				'<%= dir.rel %>/scripts/mod/object/first.js',
@@ -187,7 +162,6 @@ module.exports = function(grunt) {
 				'<%= dir.rel %>/scripts/mod/wight/third-wight.js',
 				'<%= dir.rel %>/scripts/mod/wight/forth-wight.js',
 				'<%= dir.rel %>/scripts/mod/page/second-page.js',
-				
 				'<%= dir.rel %>/scripts/tenth-index.js',
 			],
 			dest: '<%= dir.rel %>/scripts/tenth-index.js'

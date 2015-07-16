@@ -26,13 +26,17 @@
 </pre>
 <h3>使用入口说明</h3>
 <pre>
-    <strong>1.属性配置有3项</strong>
-	data-basepath="scripts" data-contextpath="" data-dependonload="true"
+    <strong>1.属性配置有4项</strong>
+	data-basepath="scripts" data-contextpath="" data-dependonload="true" data-param="v=1"
     <strong>2.js配置优先级会覆盖属性配置</strong>
 	compose.config({
 		basePath: 'scripts',//设置javascript公共路径
 		contextPath: '',//设置项目路径，默认为当前目录
-		dependOnload: 'true'//是否通过onload触发，配置为true即可
+		dependOnload: 'true',//是否通过onload触发，配置为true即可
+        data-param: 'v=1', //版本号
+		paths: { //配置对象和路径的键值对
+			jQuery: 'http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min'
+		}
 	})
     <strong>3.只有一个接口, 重复再重复</strong>
 	compose.require(['mod/a'], function(a){

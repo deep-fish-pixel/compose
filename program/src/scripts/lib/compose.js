@@ -1,5 +1,5 @@
 /**
- * v1.0
+ * v1.0.1
  * mawei(14020803)
  * qq:120290590
  */
@@ -28,15 +28,20 @@
 		}
 		return orig;
 	}
+	/**
+	 * 添加script事件 
+	 */
 	function addOnloadEvent(dom, callback){
 		if(dom && typeof dom.onload !== 'undefined'){
 			dom.onload = function(){
+				this.onload = null;
 				callback();
 			};
 		}
 		else if(dom){
 			dom.onreadystatechange = function(){
-				if(this.readyState =='complete'){
+				if(this.readyState =='complete' || this.readyState =='loaded'){
+					this.onreadystatechange = null;
 					callback();
 				}
 			};
@@ -46,6 +51,48 @@
 		return object && typeof object==='object' &&
 				Array == object.constructor;
 	}
+	function trimUrl(str){
+		if(str){
+			var ret = str.match(/^\s*(\S*)\s*$/), retS;
+			if(ret){
+				retS = ret[1].match(/(.*)\?+$/);
+				if(retS){
+					return retS[1];
+				}
+				else return ret[1];
+			}
+		}
+		return str;
+	}
+	/**
+	 * 添加window load事件 
+	 */
+	var windowLoader = (function (){
+		if (document.all) {
+			window.attachEvent('onload', loader)
+		}
+		else {
+			window.addEventListener('load', loader, false);
+		}
+		function loader(){
+			for(var i=0; i<callbacks.length; i++){
+				callbacks[i]();
+			}
+			callbacks = null;
+		}
+		var callbacks = [];
+		return {
+			on: function(callback){
+				if(callbacks){
+					callbacks.push(callback);
+				}
+				else{
+					callback();
+				}
+			}
+		}
+	})();
+	
 	
 	var compose = {
 		/**
@@ -73,21 +120,52 @@
 		 */
 		_onLoadEvents: [],
 		/**
+		 * 延迟执行
+		 */
+		_delayer: {
+			time: 0,
+			used: false,
+			push: function(callback, time){
+				var self = this;
+				this.used = true;
+				this._callback = function(){
+					if(callback){
+						callback();
+					}
+					self._timer = null;
+					self._callback = null;
+				};
+				this.time = time || 0;
+				this._timer = setTimeout(this._callback, this.time);
+			},
+			delay: function(time){
+				if(this._timer){
+					clearTimeout(this._timer);
+				}
+				if(this._callback){
+					if(time !== undefined) this._timer = time;
+					this._timer = setTimeout(this._callback, this.time);
+				}
+			}
+		},
+		/**
 		 * 添加script属性配置
 		 */
 		initConfig: function(){
 			var _config = this._config,
 				scripts = document.getElementsByTagName('script'),
-				l = scripts.length, script, contextPath, dependOnload, basePath;
+				l = scripts.length, script, contextPath, dependOnload, basePath, param;
 			for(var i=0; i<l; i++){
 				script = scripts[i];
 				contextPath = script.getAttribute('data-contextpath') || '';
 				dependOnload = script.getAttribute('data-dependonload') || '';
 				basePath = script.getAttribute('data-basepath') || '';
+				param = script.getAttribute('data-param') || '';
 				if(contextPath || dependOnload || basePath){
 					_config.contextPath = contextPath?(contextPath+"/"):"";
 					_config.dependOnload = dependOnload;
 					_config.basePath = basePath;
+					_config.param = param;
 					break;
 				}
 			}
@@ -101,6 +179,7 @@
 			_config.contextPath = _config.contextPath || "";
 			_config.dependOnload = _config.dependOnload || "";
 			_config.basePath = _config.basePath || "";
+			_config.param = _config.param || "";;
 		},
 		/**
 		 * 获取项目路径
@@ -113,6 +192,7 @@
 		 * param depend 判断此模块是否有依赖并需要提前获取该资源
 		 */
 		require: function(pathId, requires, callback, existObjectNames){
+			this._delayer.delay();
 			if(isArray(pathId) || typeof pathId  === 'function'){
 				existObjectNames = callback;
 				callback = requires;
@@ -134,12 +214,14 @@
 			requires.pathId = pathId;
 			requires.callback = callback;
 			requires.contextPath = this._config.contextPath;
+			requires.param = this._config.param;
 			requires.basePath = this._config.basePath;
 			if(this.isWaitingForChild() == true){
 				requires.parent = this._handlingRequire;
 				requires = this.preHandleRequires(requires);
 				this.handleRequires();
 				return;	
+
 			}
 			else if(this._handlingRequire && this._handlingRequire.parent){
 				requires.parent = this._handlingRequire.parent;
@@ -183,14 +265,12 @@
 		preHandleRequires: function(requires){
 			var l = requires.length, 
 				callback = requires.callback,
-				basePath = requires.basePath,
-				contextPath = requires.contextPath,
 				pathId = requires.pathId,
 				existObjectNames = requires._existObjectNames,
 				_process = requires.parent? requires.parent._process: this._process,
 				_satisfies = requires.parent? requires.parent._satisfies: this._satisfies,
 				i = _process.length,
-				jsRegExp = /\.js$/,
+				jsRegExp = /\.js$|\.js\?/,
 				path,
 				_requires = [],
 				count = 0,
@@ -224,13 +304,13 @@
 						require.resourceObjectPath = path;
 					}
 					else{
-						require.path = type=='js'?contextPath + basePath + '/' + (path&&path.match(jsRegExp)?path : path+'.js'):(contextPath + path);
+						this.handlePath(require, path, requires);
 					}
 				}
 				if(j == requires.length){
 					require.callback = callback;
 					if(pathId){
-						require.path = contextPath + basePath + '/' + (pathId.match(jsRegExp)?pathId : pathId+'.js');
+						this.handlePath(require, pathId, requires);
 					}
 				}
 				if(_satisfy){
@@ -239,10 +319,29 @@
 				_requires.push(require);
 			}
 			if(pathId){
-				_requires.path = contextPath + basePath + '/' + (pathId.match(jsRegExp)?pathId : pathId+'.js');
+				this.handlePath(_requires, pathId, requires);
 			}
 			_process.push(_requires);
 			return _requires;
+		},
+		/**
+		 * 处理path
+		 */
+		handlePath: function(require, pathId, requires){
+			var basePath = requires.basePath,
+				contextPath = requires.contextPath,
+				param = requires.param,
+				jsRegExp = /\.js$|\.js\?/;
+			pathId = trimUrl(pathId);
+			if(pathId.match(/\.css$/)){
+				require.path = contextPath ? contextPath + '/' + pathId : pathId;
+			}
+			else{
+				require.path = contextPath + basePath + '/' + (pathId.match(jsRegExp)?pathId : pathId+'.js');
+			}
+			if(require.path && param){
+				require.path += require.path.match(/\.js\?/) ? require.path.match(/\?$/) ? param : '&' + param : '?'+ param;
+			}
 		},
 		/**
 		 * 处理方法
@@ -307,7 +406,7 @@
 				this.excCompleteAndExcNext(require);
 			}
 			else{
-				var script;
+				var script, self = this, config = this._config;
 				if(require.type === 'css'){
 					script = document.createElement("link");
 					script.setAttribute('type', 'text/css');
@@ -318,12 +417,10 @@
 					script = document.createElement("script");
 					script.setAttribute('type', 'text/javascript');
 					script.setAttribute('src', require.path);
+					script.setAttribute('data-basepath', config.basePath);
 				}
-				var self = this,
-					config = this._config;
 				script.setAttribute('data-contextpath', config.contextPath);
 				script.setAttribute('data-dependonload', config.dependOnload);
-				script.setAttribute('data-basepath', config.basePath);
 				
 				if(this._config.dependOnload){
 					addOnloadEvent(script, function(){
@@ -331,13 +428,13 @@
 					})
 				}
 				var head = document.head || document.getElementsByTagName('head')[0];
-				setTimeout(function(){
+				this._onLoadEvents.push(require);
+				var self = this;
+				windowLoader.on(function (){
 					self.setWaitingForChild(true);
 					head.appendChild(script);
-				}, 0);
-				this._onLoadEvents.push(require);
+				});
 			}
-			
 		},
 		/**
 		 * 完成当前complete并执行下一个需求
@@ -449,11 +546,6 @@
 					}
 					else{
 						this.handleRequires();
-						/*此处有嵌套问题
-						var self = this;
-						setTimeout(function(){
-							self.handleRequires();
-						}, 0);*/
 					}
 				}
 			}
@@ -487,7 +579,7 @@
 			for(var j=0; j<namesLength; j++){
 				name = names[j];
 				if(!(j==0 && name == 'window')){
-					obj = obj[name];
+					obj = obj && obj[name];
 				}
 			}
 			if(!obj){
@@ -525,5 +617,6 @@
 		}
 	}
 	compose.initConfig();
+	
 	window.compose = compose;
 })();
