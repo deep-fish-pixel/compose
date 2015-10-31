@@ -1,1 +1,1 @@
-compose.config({paths:{jQuery:"http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min"}}),compose.require(["jQuery"],function(a){alert(a)});
+compose.config({paths:{jQuery:"http://res.suning.cn/public/v3/js/jquery.js"}}),compose.require(["jQuery","mod/page/first-page"],function(a){alert(a)});

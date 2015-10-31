@@ -15,7 +15,7 @@
 <pre>
     主流加载框架固然有很多优点，但缺点亦有：
     	1.侵入性强，项目改造工作量大
-        2.前后台开发不便，只有一个入口，后台代码怎么写
+        2.前后台开发不便，只有一个入口，后台代码怎么写,可用async解决之
         3.语法理解有一些要求
     本加载器针对以上缺点设定，
     	1.对原代码无侵入，使用对象检索
@@ -38,14 +38,16 @@
 			jQuery: 'http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min'
 		}
 	})
-    <strong>3.只有一个接口, 重复再重复</strong>
+    <strong>3.只有一个接口，包含定义和调用2个角色</strong>
 	compose.require(['mod/a'], function(a){
 		alert(a);
 	},['a']);
 	compose.require(function(){
 		alert('入口');
 	})
-    <strong>4.跟grunt配合使用，本加载库目前还暂不支持自动打包插件</strong>
+    <strong>4.提供async异步接口</strong>
+	<strong>5.提供paral串行接口</strong>
+    <strong>6.跟grunt配合使用，本加载库目前还暂不支持自动打包插件</strong>
 </pre>
 </body>
 </html>
